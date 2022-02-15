@@ -32,7 +32,7 @@ jobs:
           unzip -q -o ndk.zip -d .ndk
           echo "ANDROID_NDK_ROOT=$PWD/.ndk/$(ls .ndk)" >> $GITHUB_ENV
       - name: run the build script
-        run: ./android.sh -d --lts --enable-android-media-codec --enable-android-zlib
+        run: ./android.sh --lts
       - name: print build logs
         if: ${{ always() }}
         run: cat build.log
@@ -41,6 +41,6 @@ jobs:
         run: '[[ -f ./src/ffmpeg/ffbuild/config.log ]] && tail -50 ./src/ffmpeg/ffbuild/config.log'
       - uses: actions/upload-artifact@main
         with:
-          name: prebuilt/bundle-android-aar/*.aar
-          path: prebuilt/bundle-android-aar/*.aar
+          name: Publish AAR
+          path: prebuilt/bundle-android-aar-lts/*.aar
         
